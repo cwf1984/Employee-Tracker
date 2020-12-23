@@ -1,5 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const cTable = require("console.table");
+const util = require("util");
+const path = require("path");
 
 const connection = mysql.createConnection({
 
@@ -8,7 +11,7 @@ const connection = mysql.createConnection({
     user: "root",
     password: "1r4m#7uC4s",
 
-    database: "employeeTracker_db"
+    database: "employeetracker"
 
 });
 
@@ -24,36 +27,71 @@ function start() {
         name: "whatToDo",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees By Department", "View All Employees By Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Exit the Program"]
+        choices: [
+            
+            "Add a Department", 
+            "Add a Role", "Add an Employee",    
+            "View All Employees By Department", 
+            "View All Employees By Role", 
+            "View All Employees", 
+            "Update Employee Role", 
+            "Exit the Program"
+
+        ]
     })
     .then(function(answer) {
-        if (answer.whatToDo === "View All Employees") {
-            viewAllEmployees();
+        if (answer.whatToDo === "Add a Department") {
+            addADepartment();
         }
-        else if (answer.whatToDo === "View All Employees By Department") {
-            viewAllByDept();
+        else if (answer.whatToDo === "Add a Role") {
+            addARole();
         }
-        else if (answer.whatToDo === "View All Employees By Manager") {
-            viewAllByManager();
-        }
-        else if (answer.whatToDo === "Add Employee") {
+        else if (answer.whatToDo === "Add an Employee") {
             addEmployee();
         }
-        else if (answer.whatToDo === "Remove Employee") {
-            removeEmployee();
+        else if (answer.whatToDo === "View All Employees By Department") {
+            viewAllByDepartment();
+        }
+        else if (answer.whatToDo === "View All Employees By Role") {
+            viewAllByRole();
+        }
+        else if (answer.whatToDo === "View All Employees") {
+            viewAllEmployees();
         }
         else if (answer.whatToDo === "Update Employee Role") {
             updateEmployeeRole();
-        }
-        else if (answer.whatToDo ===  "Update Employee Manager") {
-            updateEmployeeManager();
-        }
-        else if (answer.whatToDo === "View All Roles") {
-            viewAllRoles();
         }
         else {
             connection.end();
         }
     })
+};
+
+function addADepartment() {
+
+};
+
+function addARole() {
+
+};
+
+function addEmployee() {
+
+};
+
+function viewAllByDepartment() {
+
+};
+
+function viewAllByRole() {
+
+};
+
+function viewAllEmployees() {
+
+};
+
+function updateEmployeeRole() {
+    
 };
 
