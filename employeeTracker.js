@@ -91,6 +91,31 @@ function addADepartment() {
 };
 
 function addARole() {
+    inquirer.prompt([
+        {
+          name: "addingRole",
+          type: "input",
+          message: "What employee role would you like to add to the database?"
+        },
+        {
+            name: "salary",
+            type: "input",
+            message: "What is the salary?"
+        }  
+    ]).then(function(answer) {
+        connection.query(
+            "INSERT INTO role SET ? ?",
+            {
+                title: answer.addingRole,
+                salary: answer.salary
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("That role has been added to the database.");
+                start();
+            }
+        );
+    });
 
 };
 
