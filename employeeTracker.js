@@ -68,6 +68,25 @@ function start() {
 };
 
 function addADepartment() {
+    inquirer.prompt([
+        {
+          name: "deptName",
+          type: "input",
+          message: "What is the name of the department you want to add to the directory?"
+        }  
+    ]).then(function(answer) {
+        connection.query(
+            "INSERT INTO department SET ?",
+            {
+                dept_name: answer.deptName
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("The department has been added.");
+                start();
+            }
+        );
+    });
 
 };
 
