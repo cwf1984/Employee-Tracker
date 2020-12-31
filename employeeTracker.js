@@ -120,6 +120,43 @@ function addARole() {
 };
 
 function addEmployee() {
+    inquirer.prompt([
+        {
+          name: "firstName",
+          type: "input",
+          message: "What is your new employee's first name?"
+        },
+        {
+          name: "lastName",
+          type: "input",
+          message: "What is their last name?"
+        },
+        {
+          name: "employeeRole",
+          type: "input",
+          message: "What is their role within the company?"
+        },
+        {
+          name: "employeeManager",
+          type: "input",
+          message: "Who is their manager?"
+        }
+    ]).then(function(answer) {
+        connection.query(
+            "INSERT INTO department SET ?",
+            {
+                first_name: answer.firstName,
+                last_name: answer.lastName,
+                role_id: answer.employeeRole,
+                manager_id: answer.employeeManager
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("Your new employee has been added to the database!");
+                start();
+            }
+        );
+    });
 
 };
 
