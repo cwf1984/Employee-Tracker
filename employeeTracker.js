@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
+const logo = require("asciiart-logo"); 
 const util = require("util");
 const path = require("path");
 
@@ -136,11 +137,13 @@ function addEmployee() {
           type: "input",
           message: "What is their role within the company?"
         },
+        //if else statements for connecting to correct id
         {
           name: "employeeManager",
           type: "input",
           message: "Who is their manager?"
         }
+        //if else statements for connecting to correct id
     ]).then(function(answer) {
         connection.query(
             "INSERT INTO department SET ?",
@@ -173,6 +176,31 @@ function viewAllEmployees() {
 };
 
 function updateEmployeeRole() {
+    inquirer.prompt([
+        {
+          name: "",
+          type: "input",
+          message: "?"
+        },
+        {
+            name: "",
+            type: "",
+            message: ""
+        }  
+    ]).then(function(answer) {
+        connection.query(
+            "INSERT INTO role SET ? ?",
+            {
+                title: answer.addingRole,
+                salary: answer.salary
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("That role has been added to the database.");
+                start();
+            }
+        );
+    });
     
 };
 
